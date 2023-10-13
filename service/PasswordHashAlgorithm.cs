@@ -1,12 +1,21 @@
 using System.Security.Cryptography;
+using service;
 
 namespace Service;
 
 public abstract class PasswordHashAlgorithm
 {
-    public static PasswordHashAlgorithm Create(string algorithmName)
+    const string PreferredAlgorithmName = Argon2idPasswordHashAlgorithm.Name;
+
+    public static PasswordHashAlgorithm Create(string algorithmName = PreferredAlgorithmName)
     {
-        throw new NotImplementedException();
+        switch (algorithmName)
+        {
+            case Argon2idPasswordHashAlgorithm.Name:
+                return new Argon2idPasswordHashAlgorithm();
+            default:
+                throw new NotImplementedException();
+        }
     }
 
     public abstract string GetName();
