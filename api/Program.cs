@@ -39,6 +39,9 @@ app.UseCors(options =>
 app.UseSpaStaticFiles();
 app.UseSpa(conf => { conf.Options.SourcePath = frontEndRelativePath; });
 
+
+app.MapGraphQL();
+
 app.MapControllers();
 app.UseMiddleware<GlobalExceptionHandler>();
 app.Run();
